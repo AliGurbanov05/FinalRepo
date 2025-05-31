@@ -1,0 +1,149 @@
+.header {
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    padding: 20px;
+    position: sticky;
+    background-color: white;
+
+    .container {
+        width: 80%;
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: space-between;
+
+        h1 {
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            color: rgb(0, 0, 0);
+            font-family: "Muli",
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                "Helvetica Neue",
+                Arial,
+                sans-serif,
+                "Apple Color Emoji",
+                "Segoe UI Emoji",
+                "Segoe UI Symbol",
+                "Noto Color Emoji";
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 48px;
+
+            span {
+                color: #007bff;
+            }
+        }
+
+        .nav {
+            ul {
+                gap: 30px;
+                display: flex;
+                list-style: none;
+                align-items: center;
+
+                li {
+                    a {
+                        color: black;
+                        font-size: 18px;
+                        text-decoration: none;
+
+                        &:hover {
+                            color: orangered;
+                            transition: 0.3s ease;
+                        }
+                    }
+                }
+            }
+        }
+
+        .login {
+            padding: 9px 30px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .ham {
+            display: none;
+
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                border: none;
+                font-size: 30px;
+                background: transparent;
+
+            }
+
+            .hamNAV {
+                ul {
+                    gap: 30px;
+                    display: flex;
+                    list-style: none;
+                    padding: 30px 20px;
+                    flex-direction: column;
+
+                    li {
+                        a {
+                            color: black;
+                            font-size: 16px;
+                            text-decoration: none;
+
+                            &:hover {
+                                color: orangered;
+                                transition: 0.3s ease;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width:700px) and (max-width:1024px) {
+    .header {
+        .container {
+            width: 96%;
+
+            .nav {
+                ul {
+                    gap: 20px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width:300px) and (max-width:700px) {
+    .header {
+        .container {
+            width: 100%;
+
+            .nav {
+                display: none;
+            }
+
+            .login {
+                display: none;
+            }
+
+            .ham {
+                display: block;
+            }
+        }
+    }
+}
