@@ -11,18 +11,35 @@ const Header = () => {
   }
   const navigate = useNavigate();
 
-  const goToBasket = () => {
-    navigate('/basket');
-  };
-  const goToAdmin = () => {
-    navigate('/admin');
+  const goToBlog = () => {
+    navigate('/blog');
   };
   const goToHome = () => {
     navigate('/');
   };
-  const goToLogin = () => {
-    navigate('/login');
+  const goToDoctors = () => {
+    navigate('/doctors');
   };
+  const goToDepartament = () => {
+    navigate('/departament');
+  };
+  const goToLogin = () => {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+
+    if (token && role) {
+      if (role === 'doctor') {
+        navigate('/doctor/dashboard');
+      } else if (role === 'patient') {
+        navigate('/patient/dashboard');
+      } else {
+        navigate('/login');
+      }
+    } else {
+      navigate('/');
+    }
+  };
+
 
   return (
     <div className={style.header}>
@@ -31,9 +48,9 @@ const Header = () => {
         <div className={style.nav}>
           <ul>
             <li><a onClick={goToHome} href="">Home</a></li>
-            <li><a onClick={goToBasket} href="">Basket</a></li>
-            <li><a onClick={goToAdmin} href="">Admin</a></li>
-            <li><a href="">Blog</a></li>
+            <li><a onClick={goToDepartament} href="">Departament</a></li>
+            <li><a onClick={goToDoctors} href="">Doctors</a></li>
+            <li><a onClick={goToBlog} href="">Blog</a></li>
             <li><a href="">Contact</a></li>
           </ul>
         </div>
@@ -49,11 +66,9 @@ const Header = () => {
             <div className={style.hamNAV}>
               <ul>
                 <li><a onClick={goToHome} href="">Home</a></li>
-                <li><a onClick={goToBasket} href="">Products</a></li>
-                <li><a onClick={goToAdmin} href="">Admin</a></li>
-                <li><a href="">Special</a></li>
-                <li><a href="">Testominals</a></li>
-                <li><a href="">Blog</a></li>
+                <li><a href="">Products</a></li>
+                <li><a onClick={goToDoctors} href="">Doctors</a></li>
+                <li><a onClick={goToBlog} href="">Blog</a></li>
                 <li><a href="">Contact</a></li>
                 <li><a onClick={goToLogin} href="">Login</a></li>
               </ul>

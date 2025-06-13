@@ -74,6 +74,12 @@
                 justify-content: center;
                 padding: 12px 30px;
                 background: rgb(57, 108, 240);
+                cursor: pointer;
+
+                &:hover {
+                    transition: 0.3s ease;
+                    background-color: #007bff93;
+                }
             }
         }
 

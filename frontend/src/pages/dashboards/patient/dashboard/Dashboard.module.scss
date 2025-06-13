@@ -1,0 +1,49 @@
+.dashboard {
+    padding: 2rem;
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .error {
+        color: red;
+        margin-top: 1rem;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        section {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .logout {
+        width: 100%;
+        display: flex;
+        margin-top: 30px;
+        align-items: center;
+        justify-content: center;
+
+        .logoutButton {
+            padding: 0.6rem 1.2rem;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #c0392b;
+            }
+        }
+    }
+}

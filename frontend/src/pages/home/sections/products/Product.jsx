@@ -17,10 +17,7 @@ const Product = () => {
       <div className={style.txt}>
         <p>Popular Products</p>
         <h1>Our Products</h1>
-        <span>
-          Far far away, behind the word mountains, far from the countries
-          Vokalia and Consonantia
-        </span>
+
       </div>
       <div className={style.cards}>
         {products.length === 0 ? (

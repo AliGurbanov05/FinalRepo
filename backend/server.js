@@ -3,6 +3,9 @@ import express from "express";
 import { configDotenv } from "dotenv";
 import basketRouter from "./router/basketRouter.js";
 import productRouter from "./router/productRouter.js";
+import loginRouter from "./router/loginRouter.js";
+import registerRouter from "./router/registerRouter.js";
+import patientRouter from "./router/patientRouter.js"
 import { connectDB } from "./db/config.js";
 
 configDotenv();
@@ -17,9 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/products", productRouter);
 app.use("/basket", basketRouter);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
+app.use('/patient', patientRouter);
 
 app.listen(PORT || 8030, () => {
-    console.log("Server is running on port "+PORT);
+    console.log("Server is running on port " + PORT);
 });
-
-// mongose_URL = mongodb + srv://Ali:Qurbanov2005@cluster0.bx39qu2.mongodb.net/
