@@ -73,6 +73,7 @@ const Appointement = () => {
                         <p><strong>Ad:</strong> {patientInfo.name}</p>
                         <p><strong>Soyad:</strong> {patientInfo.surname}</p>
                         <p><strong>Telefon:</strong> {patientInfo.phone}</p>
+                        <p><strong>Email:</strong> {patientInfo.email}</p>
                         <p><strong>Fin:</strong> {patientInfo.fin}</p>
                         <p><strong>Rolu:</strong> {patientInfo.role}</p>
                         <p><strong>Qeydiyyat tarixi:</strong> {new Date(patientInfo.createdAt).toLocaleDateString()}</p>

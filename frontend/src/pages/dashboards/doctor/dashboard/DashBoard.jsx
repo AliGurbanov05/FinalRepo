@@ -79,15 +79,10 @@ const DashBoard = () => {
   };
 
   // Görüşü bitirmək
-  const handleFinish = async (appointmentId) => {
-    try {
-      await dispatch(finishAppointment(appointmentId)).unwrap();
-      alert('Görüş uğurla bitirildi');
-      dispatch(fetchDoctorDashboard());
-    } catch (error) {
-      alert('Görüş bitirilərkən xəta baş verdi: ' + error);
-    }
+  const handleFinish = (appointmentId) => {
+    navigate(`/result/${appointmentId}`);
   };
+  
 
   // Görüşü silmək
   const handleDelete = async (appointmentId) => {
@@ -187,38 +182,64 @@ const DashBoard = () => {
             </section>
 
             <section>
-              <h3>Görüşlər</h3>
-              {appointments.length === 0 ? (
-                <p>Görüş tapılmadı</p>
+              <h3>Aktiv Görüşlər</h3>
+              {appointments.filter(app => app.status === 'active').length === 0 ? (
+                <p>Aktiv görüş tapılmadı</p>
               ) : (
                 <ul className={style.appointmentList}>
-                  {appointments.map(app => (
-                    <li key={app._id} className={style.appointmentItem}>
-                      <div>
-                        <p><strong>Tarix:</strong> {new Date(app.date).toLocaleString()}</p>
-                        <p><strong>Status:</strong> {app.status}</p>
-                        <p><strong>Xəstə:</strong> {app.patientName || 'Naməlum'}</p>
-                      </div>
-                      <div className={style.buttons}>
-                        <button
-                          onClick={() => handleFinish(app._id)}
-                          className={style.finishButton}
-                          disabled={app.status === 'completed'}
-                        >
-                          Tamamla
-                        </button>
-                        <button
-                          onClick={() => handleDelete(app._id)}
-                          className={style.deleteButton}
-                        >
-                          Sil
-                        </button>
-                      </div>
-                    </li>
-                  ))}
+                  {appointments
+                    .filter(app => app.status === 'active')
+                    .map(app => (
+                      <li key={app._id} className={style.appointmentItem}>
+                        <div>
+                          <p key={app._id}>
+                            Tarix: {new Date(app.date).toLocaleDateString('az-AZ')}{" "}-{" "}
+                            {" "} Saat:{" "}{app.time}
+                          </p>
+                        </div>
+                        <div className={style.buttons}>
+                          <button
+                            onClick={() => handleFinish(app._id)}
+                            className={style.finishButton}
+                            disabled={app.status === 'completed'}
+                          >
+                            Tamamla
+                          </button>
+                          <button
+                            onClick={() => handleDelete(app._id)}
+                            className={style.deleteButton}
+                          >
+                            Sil
+                          </button>
+                        </div>
+                      </li>
+                    ))}
                 </ul>
               )}
             </section>
+
+            <section>
+              <h3>Bitmiş Görüşlər</h3>
+              {appointments.filter(app => app.status === 'deactive').length === 0 ? (
+                <p>Bitmiş görüş tapılmadı</p>
+              ) : (
+                <ul className={style.appointmentList}>
+                  {appointments
+                    .filter(app => app.status === 'deactive')
+                    .map(app => (
+                      <li key={app._id} className={style.appointmentItem}>
+                        <div>
+                          <p key={app._id}>
+                            Tarix: {new Date(app.date).toLocaleDateString('az-AZ')}{" "}-{" "}
+                            {" "} Saat:{" "}{app.time}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </section>
+
 
             <section className={style.deleteAccountSection}>
               <button

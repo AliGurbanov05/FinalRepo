@@ -1,4 +1,6 @@
 .dashboard {
+    display: flex;
+    flex-direction: column;
     max-width: 700px;
     margin: 2rem auto;
     padding: 1.5rem 2rem;
@@ -223,20 +225,26 @@
     }
 }
 .appointmentList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     list-style: none;
     padding: 0;
 }
 
 .appointmentItem {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
+    span{
+        color: blue;
+    }
 }
 
 .buttons button {
-    margin-left: 10px;
+    margin-right: 10px;
     padding: 6px 12px;
     border: none;
     cursor: pointer;

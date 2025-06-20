@@ -21,19 +21,11 @@ export const getAppointmentsByPhone = async (req, res) => {
 };
 
 export const createAppointment = async (req, res) => {
-    const { category, date, time } = req.body;
+    const { category, date, time, doctorId } = req.body;  // doctorId də əlavə olundu
     const userId = req.user?.id;
 
     try {
-        const user = await User.findById(userId).select('name surname phone fin').lean();
-
-        console.log("User document:", user);
-        console.log("User fields:", {
-            name: user?.name,
-            surname: user?.surname,
-            phone: user?.phone,
-            fin: user?.fin,
-        });
+        const user = await User.findById(userId).select('name surname email phone fin').lean();
 
         if (!user) {
             return res.status(404).json({ message: 'İstifadəçi tapılmadı' });
@@ -41,16 +33,16 @@ export const createAppointment = async (req, res) => {
 
         const newAppointment = new Appointment({
             patientId: userId,
+            doctorId,   // burada əlavə olunur
             name: user.name,
             surname: user.surname,
             phone: user.phone,
             fin: user.fin,
+            email: user.email,
             category,
             date,
             time,
         });
-
-        console.log("Appointment save üçün hazırlanan data:", newAppointment);
 
         await newAppointment.save();
 
@@ -60,3 +52,4 @@ export const createAppointment = async (req, res) => {
         res.status(500).json({ message: 'Server xətası' });
     }
 };
+;

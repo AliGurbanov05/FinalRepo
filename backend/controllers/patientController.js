@@ -1,12 +1,12 @@
 import User from '../model/userModel.js';
 import Appointment from '../model/appointmentModel.js';
-import Response from '../model/responseModel.js';
+import Response from '../model/resultModel.js';
 
 // Xəstə panel üçün user profil və digər məlumatlar
 export const getPatientDashboard = async (req, res) => {
     try {
         const userId = req.user.id;
-        const user = await User.findById(userId).select('name surname phone role');
+        const user = await User.findById(userId).select('name surname phone email role');
 
         if (!user) {
             return res.status(404).json({ message: 'İstifadəçi tapılmadı' });
@@ -18,21 +18,14 @@ export const getPatientDashboard = async (req, res) => {
             .populate('appointmentId')
             .populate('doctorId', 'name surname');
 
-        // Məsələn, analiz nəticələri statik nümunə kimi
-        const analysisResults = [
-            { name: 'Qan şəkəri', value: 5.4, unit: 'mmol/L' },
-            { name: 'Təzyiq', value: '120/80', unit: 'mmHg' },
-            { name: 'Nəbz', value: 75, unit: 'bpm' }
-        ];
-
         return res.status(200).json({
             user: {
                 name: user.name,
                 surname: user.surname,
                 phone: user.phone,
+                email: user.email,
                 role: user.role,
             },
-            results: analysisResults,
             appointments,
             responses
         });

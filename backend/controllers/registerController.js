@@ -1,15 +1,23 @@
 // controllers/registerController.js
-import User from '../model/loginModel.js'
+import User from '../model/userModel.js'
+import bcrypt from 'bcryptjs';
 
 export const register = async (req, res) => {
-    const { username, password, role, doctorKey } = req.body;
+    const hashPassword = async (password) => {
+        const salt = await bcrypt.genSalt(10);
+        return await bcrypt.hash(password, salt);
+    };
+
+    console.log("Register body:", req.body);
+
+    const { name, surname, phone, fin, email, password, role, category, doctorKey } = req.body;
 
     try {
-        if (!username || !password || !role) {
-            return res.status(400).json({ message: 'Bütün xanaları doldurun' });
+        if (role === 'patient' && !email) {
+            return res.status(400).json({ message: 'Xəstə üçün email vacibdir' });
         }
 
-        const existingUser = await User.findOne({ username });
+        const existingUser = await User.findOne({ name });
         if (existingUser) {
             return res.status(409).json({ message: 'Bu istifadəçi artıq mövcuddur' });
         }
@@ -23,12 +31,29 @@ export const register = async (req, res) => {
             }
         }
 
-        const newUser = new User({ username, password, role });
+        const hashedPassword = await hashPassword(password);
+
+        const newUser = new User({
+            name,
+            surname,
+            phone,
+            fin,
+            email: role === 'patient' ? email : undefined,
+            password: hashedPassword,
+            role,
+            category: role === 'doctor' ? category : undefined
+        });
+
         await newUser.save();
 
-        res.status(201).json({ message: 'Qeydiyyat tamamlandı', username, role });
+        console.log("Saved user:", newUser);
+
+        return res.status(201).json({ message: 'Qeydiyyat tamamlandı' });
     } catch (err) {
         console.error('REGISTER ERROR:', err.message);
-        res.status(500).json({ message: 'Server xətası baş verdi' });
+        return res.status(500).json({ message: 'Server xətası baş verdi' });
     }
 };
+
+
+

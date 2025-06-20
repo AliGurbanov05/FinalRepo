@@ -8,15 +8,24 @@ import Layout from '../../components/common/layout/Layout';
 const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { loading, error, user, message } = useSelector(state => state.register);
 
-    const { loading, error, user } = useSelector((state) => state.register);
-
-    const [form, setForm] = useState({
-        username: '',
+    const initialFormState = {
+        name: '',
+        surname: '',
+        phone: '',
+        fin: '',
+        email: '',
         password: '',
         role: 'patient',
-        doctorKey: ''
-    });
+        doctorKey: '',
+        category: ''
+    };
+
+    const [form, setForm] = useState(initialFormState);
+    
+    
+      
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,7 +33,20 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(registerUser(form));
+        const payload = { ...form };
+
+        // Əgər rol doctor-dursa email göndərmə və category tələb olunur
+        if (form.role === 'doctor') {
+            delete payload.email; // həkimdə email olmamalıdır
+        }
+
+        // Əgər rol patient-dirsə, doctorKey və category lazım deyil
+        if (form.role === 'patient') {
+            delete payload.doctorKey;
+            delete payload.category;
+        }
+
+        dispatch(registerUser(payload));
     };
 
     useEffect(() => {
@@ -42,12 +64,49 @@ const Register = () => {
 
                     <input
                         type="text"
-                        name="username"
-                        placeholder="İstifadəçi adı"
-                        value={form.username}
+                        name="name"
+                        placeholder="Ad"
+                        value={form.name}
                         onChange={handleChange}
                         required
                     />
+
+                    <input
+                        type="text"
+                        name="surname"
+                        placeholder="Soyad"
+                        value={form.surname}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <input
+                        type="text"
+                        name="phone"
+                        placeholder="Telefon"
+                        value={form.phone}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="fin"
+                        placeholder="Fin"
+                        value={form.fin}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    {form.role === 'patient' && (
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={form.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    )}
 
                     <input
                         type="password"
@@ -70,14 +129,24 @@ const Register = () => {
                     </select>
 
                     {form.role === 'doctor' && (
-                        <input
-                            type="text"
-                            name="doctorKey"
-                            placeholder="Həkim açar kodu"
-                            value={form.doctorKey}
-                            onChange={handleChange}
-                            required
-                        />
+                        <>
+                            <input
+                                type="text"
+                                name="category"
+                                placeholder="İxtisas (məs: Lor)"
+                                value={form.category}
+                                onChange={handleChange}
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="doctorKey"
+                                placeholder="Həkim açar kodu"
+                                value={form.doctorKey}
+                                onChange={handleChange}
+                                required
+                            />
+                        </>
                     )}
 
                     <button type="submit" disabled={loading}>
@@ -85,7 +154,7 @@ const Register = () => {
                     </button>
 
                     {error && <p className={style.error}>{error}</p>}
-                    {user?.message && <p className={style.success}>{user.message}</p>}
+                    {user?.message && <p className={style.success}>{message}</p>}
                 </form>
             </div>
         </Layout>

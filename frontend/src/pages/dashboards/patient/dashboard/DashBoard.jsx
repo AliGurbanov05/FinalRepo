@@ -37,15 +37,23 @@ const DashBoard = () => {
     const user = useSelector((state) => state.auth.user);
     console.log('Görüşlər:', appointments);
     console.log('Diaqnozlar:', responses);
+
+
     useEffect(() => {
-        if (user) {
+        console.log('Dashboard data:', data);
+        if (data) {
             setFormData({
-                name: user.name || '',
-                surname: user.surname || '',
-                phone: user.phone || ''
+                name: data.user?.name || data.name || '',
+                surname: data.user?.surname || data.surname || '',
+                phone: data.user?.phone || data.phone || '',
+                email: data.user?.email || data.email || '',
             });
         }
-    }, [user]);
+    }, [data]);
+
+
+
+
 
 
     const handleSave = async () => {
@@ -78,12 +86,14 @@ const DashBoard = () => {
         setEditMode(false);
         if (data) {
             setFormData({
-                name: data.name || '',
-                surname: data.surname || '',
-                phone: data.phone || ''
+                name: data.user?.name || data.name || '',
+                surname: data.user?.surname || data.surname || '',
+                phone: data.user?.phone || data.phone || '',
+                email: data.user?.email || data.email || '',
             });
         }
     };
+
 
     const handleFieldClick = () => {
         setEditMode(true);
@@ -151,6 +161,20 @@ const DashBoard = () => {
                                     formData.phone
                                 )}
                             </p>
+                            <p onClick={handleFieldClick}>
+                                <strong>Email: </strong>
+                                {editMode ? (
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className={style.editable}
+                                    />
+                                ) : (
+                                    formData.email // burda email göstərilməlidir
+                                )}
+                            </p>
 
                             <p><strong>Rol:</strong> {data.role}</p>
 
@@ -164,34 +188,61 @@ const DashBoard = () => {
 
                         <section>
                             <h3>Görüşlər</h3>
-                            {appointments.length === 0 ? (
-                                <p>Görüş tapılmadı</p>
+                            {appointments.filter(app => app.status === 'active').length === 0 ? (
+                                <p>Aktiv görüş tapılmadı</p>
                             ) : (
                                 <ul>
-                                    {appointments.map(app => (
-                                        <li key={app._id}>
-                                            Tarix: {new Date(app.date).toLocaleString()} - Status: {app.status}
-                                        </li>
-                                    ))}
+                                    {appointments
+                                        .filter(app => app.status === 'active')
+                                        .map(app => (
+                                            <li key={app._id}>
+                                                <p key={app._id}>
+                                                    Tarix: {new Date(app.date).toLocaleDateString('az-AZ')}{" "}-{" "}
+                                                    {" "} Saat:{" "}{app.time}
+                                                </p>
+                                            </li>
+                                        ))}
                                 </ul>
                             )}
                         </section>
 
                         <section>
-                            <h3>Diaqnozlar</h3>
-                            {(!responses || responses.length === 0) ? (
-                                <p>Diaqnoz tapılmadı</p>
+                            <h3>Kecmiş Görüşlər</h3>
+                            {appointments.filter(app => app.status === 'deactive').length === 0 ? (
+                                <p>Kecmiş görüş tapılmadı</p>
                             ) : (
                                 <ul>
-                                    {responses.map(resp => (
-                                        <li key={resp._id}>
-                                            Görüş ID: {resp.appointmentId?._id || 'Yoxdur'} - Diaqnoz: {resp.diagnosis}
-                                        </li>
-                                    ))}
+                                    {appointments
+                                        .filter(app => app.status === 'deactive')
+                                        .map(app => (
+                                            <li key={app._id}>
+                                                Tarix: {new Date(app.date).toLocaleDateString('az-AZ')}{" "}-{" "}
+                                                {" "} Saat:{" "}{app.time}
+                                            </li>
+                                        ))}
                                 </ul>
                             )}
                         </section>
 
+
+                        <section>
+                            <h3>Diaqnozlar</h3>
+                            {responses.length === 0 ? (
+                                <p>Diaqnoz tapılmadı</p>
+                            ) : (
+                                <ul>
+                                    {responses.map(resp => {
+                                        const app = appointments.find(a => a._id === resp.appointmentId || a._id === resp.appointmentId?._id);
+                                        return (
+                                            <li key={app._id}>
+                                                Tarix: {new Date(app.date).toLocaleDateString('az-AZ')}{" "}-{" "}
+                                                {" "} Saat:{" "}{app.time}
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            )}
+                        </section>
 
                     </div>
                 )}

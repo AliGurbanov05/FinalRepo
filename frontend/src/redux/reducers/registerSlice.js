@@ -18,9 +18,13 @@ export const registerUser = createAsyncThunk(
 
 const registerSlice = createSlice({
     name: 'register',
+    // Reducer state strukturu
     initialState: {
+        data: null,   // dashboard məlumatları (user, appointments, responses)
+        appointments: [],
+        responses: [],
+        message:null,
         loading: false,
-        user: null,
         error: null,
     },
     reducers: {},
@@ -33,9 +37,11 @@ const registerSlice = createSlice({
             })
             .addCase(registerUser.fulfilled, (state, action) => {
                 state.loading = false;
-                state.user = action.payload;
+                // Məsələn, belə:
+                state.user = action.payload.user; // actual user object
+                state.message = action.payload.message; // success mesajı ayrıca saxla
                 state.error = null;
-            })
+            })            
             .addCase(registerUser.rejected, (state, action) => {
                 state.loading = false;
                 state.user = null;

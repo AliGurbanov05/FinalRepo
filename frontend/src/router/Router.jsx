@@ -12,6 +12,10 @@ import DoctorDashBoard from '../pages/dashboards/doctor/dashboard/DashBoard';
 import Doctors from '../pages/doctors/Doctors';
 import Departament from '../pages/departament/Departament';
 import Blog from '../pages/blog/Blog';
+import Payment from '../pages/payment/Payment';
+import Receipt from '../pages/receipt/Receipt';
+import Appointement from '../pages/appointment/Appointment';
+import Result from '../pages/result/Result';
 // import DoctorDashboard from '../pages/dashboard/DoctorDashboard'; // öz yolunuza görə düzəldin
 
 const Router = () => {
@@ -62,6 +66,38 @@ const Router = () => {
                     element={
                         <ProtectedRoute allowedRoles={['doctor']}>
                             <DoctorDashBoard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/payment'
+                    element={
+                        <ProtectedRoute allowedRoles={['patient']}>
+                            <Payment />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/receipt'
+                    element={
+                        <ProtectedRoute allowedRoles={['patient']}>
+                            <Receipt />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/result/:appointmentId'
+                    element={
+                        <ProtectedRoute allowedRoles={['doctor']}>
+                            <Result/>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/appointment'
+                    element={
+                        <ProtectedRoute allowedRoles={['patient']}>
+                            <Appointement />
                         </ProtectedRoute>
                     }
                 />

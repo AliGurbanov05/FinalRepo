@@ -5,14 +5,21 @@ import User from '../model/userModel.js';
 export const getDoctorDashboard = async (req, res) => {
     try {
         const doctorId = req.user.id;
+        const doctor = await User.findById(req.user.id).select('name surname phone role category');
+        const doctorCategory = doctor.toObject().category;
 
-        const doctor = await User.findById(doctorId).select('name surname phone fin role category');
+        console.log('Həkimin category:', doctorCategory);
+
 
         if (!doctor) {
             return res.status(404).json({ message: 'Həkim tapılmadı' });
         }
 
-        const appointments = await Appointment.find({ category: doctor.category });
+        const appointments = await Appointment.find({ category: doctorCategory })
+            .populate('patientId', 'name surname phone');
+        console.log('Həkim:', doctor);
+        console.log('Həkimin category:', doctor.category);
+
 
         res.status(200).json({ doctor, appointments });
     } catch (err) {
@@ -59,16 +66,14 @@ export const deleteDoctorAccount = async (req, res) => {
 
 export const getDoctorAppointments = async (req, res) => {
     try {
-        // Həkimin tam məlumatlarını götür (kateqoriya üçün)
         const doctor = await User.findById(req.user.id);
-        if (!doctor) {
-            return res.status(404).json({ message: "Həkim tapılmadı" });
-        }
+        const doctorCategory = doctor.toObject().category;
 
-        const doctorCategory = doctor.category; // modelində mütləq category olmalıdır!
+        const appointments = await Appointment.find({ category: doctorCategory, status: 'pending' })
+            .sort({ createdAt: -1 })
+            .populate('patientId', 'name surname phone'); // burda da xəstəni əlavə et
+        console.log('name,surname,phone');
 
-        // Kateqoriyaya görə görüşləri gətir
-        const appointments = await Appointment.find({ category: doctorCategory, status: 'pending' }).sort({ createdAt: -1 });
 
         res.status(200).json(appointments);
     } catch (err) {
@@ -92,5 +97,20 @@ export const completeAppointment = async (req, res) => {
         res.status(200).json({ message: 'Görüş tamamlandı', appointment });
     } catch (err) {
         res.status(500).json({ message: err.message });
+    }
+};
+
+export const deleteAppointment = async (req, res) => {
+    try {
+        const appointmentId = req.params.id;
+        const appointment = await Appointment.findByIdAndDelete(appointmentId);
+
+        if (!appointment) {
+            return res.status(404).json({ message: 'Görüş tapılmadı' });
+        }
+
+        res.status(200).json({ message: 'Görüş uğurla silindi' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
