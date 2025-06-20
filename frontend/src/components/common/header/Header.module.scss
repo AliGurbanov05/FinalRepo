@@ -83,38 +83,58 @@
             }
         }
 
-        .ham {
-            display: none;
+        .logout {
+            padding: 9px 30px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
 
-            button {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 10px;
-                border: none;
-                font-size: 30px;
-                background: transparent;
-
+            &:hover {
+                transition: 0.3s ease;
+                background-color: #007bff93;
             }
+        }
 
-            .hamNAV {
-                ul {
-                    gap: 30px;
-                    display: flex;
-                    list-style: none;
-                    padding: 30px 20px;
-                    flex-direction: column;
+    }
 
-                    li {
-                        a {
-                            color: black;
-                            font-size: 16px;
-                            text-decoration: none;
+    .ham {
+        display: none;
 
-                            &:hover {
-                                color: orangered;
-                                transition: 0.3s ease;
-                            }
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: none;
+            font-size: 30px;
+            background: transparent;
+
+        }
+
+        .hamNAV {
+            ul {
+                gap: 30px;
+                display: flex;
+                list-style: none;
+                padding: 30px 20px;
+                flex-direction: column;
+
+                li {
+                    a {
+                        color: black;
+                        font-size: 16px;
+                        text-decoration: none;
+
+                        &:hover {
+                            color: orangered;
+                            transition: 0.3s ease;
                         }
                     }
                 }
@@ -147,6 +167,10 @@
             }
 
             .login {
+                display: none;
+            }
+
+            .logout {
                 display: none;
             }
 

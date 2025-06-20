@@ -2,10 +2,10 @@ import User from '../model/loginModel.js';
 import generateToken from '../utils/generateToken.js';
 
 export const login = async (req, res) => {
-    const { username, password } = req.body;
+    const { name, password } = req.body;
 
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ name });
         if (!user) {
             return res.status(400).json({ message: 'İstifadəçi tapılmadı' });
         }

@@ -5,16 +5,16 @@ import style from './Login.module.scss';
 import Layout from '../../components/common/layout/Layout';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     // 1. Admin üçün frontend yoxlama
-    if (username === 'Eli' && password === '2025') {
+    if (name === 'Eli' && password === '2025') {
       localStorage.setItem('token', 'admin-static-token'); // istəsən JWT verə bilərik
       localStorage.setItem('role', 'admin');
       navigate('/admin');
@@ -23,10 +23,11 @@ const Login = () => {
 
     // 2. Normal istifadəçi girişi
     try {
-      const res = await axios.post('http://localhost:8030/login', { username, password });
+      const res = await axios.post('http://localhost:8030/login', { name, password });
       const { token, role } = res.data;
       localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
+      localStorage.setItem('role', role.toLowerCase());
+      console.log("Token:", localStorage.getItem("token"));
 
       if (role === 'patient') {
         navigate('/patient/dashboard');
@@ -39,7 +40,7 @@ const Login = () => {
       setError('İstifadəçi adı və ya şifrə yalnışdır');
     }
   };
-  
+
   return (
     <Layout>
       <div className={style.loginWrapper}>
@@ -48,8 +49,8 @@ const Login = () => {
           <input
             type="text"
             placeholder="İstifadəçi adı"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
           <input
