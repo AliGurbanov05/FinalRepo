@@ -4,6 +4,7 @@ import {
     updateDoctorProfile,
     getDoctorAppointments,
     completeAppointment,
+    deleteAppointment,
     deleteDoctorAccount // Yeni import
 } from '../controllers/doctorController.js';
 import { verifyToken, authorizeRoles } from '../middleware/auth.js';
@@ -17,5 +18,5 @@ router.put('/appointments/:id/complete', verifyToken, authorizeRoles('doctor'), 
 
 // Yeni route hesab silmək üçün
 router.delete('/delete-account', verifyToken, authorizeRoles('doctor'), deleteDoctorAccount);
-
+router.delete('/appointments/:id', verifyToken, authorizeRoles('doctor'), deleteAppointment);
 export default router;

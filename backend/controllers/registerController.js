@@ -17,6 +17,18 @@ export const register = async (req, res) => {
             return res.status(400).json({ message: 'Xəstə üçün email vacibdir' });
         }
 
+        // ✅ Telefon nömrəsi validasiyası (Azərbaycan formatı: 050, 051, 055, 070 və s.)
+        const phoneRegex = /^(050|051|055|070|077|099|010)\d{7}$/;
+        if (!phoneRegex.test(phone)) {
+            return res.status(400).json({ message: 'Telefon nömrəsi düzgün formatda deyil (məsələn, 0501234567)' });
+        }
+
+        // ✅ FIN kodu validasiyası (Azərbaycan üzrə: 7 simvol, yalnız böyük hərflər və rəqəmlər)
+        const finRegex = /^[A-Z0-9]{7}$/;
+        if (!finRegex.test(fin)) {
+            return res.status(400).json({ message: 'FIN kodu 7 simvoldan ibarət olmalı və yalnız böyük hərflər və rəqəmlərdən ibarət olmalıdır' });
+        }
+
         const existingUser = await User.findOne({ name });
         if (existingUser) {
             return res.status(409).json({ message: 'Bu istifadəçi artıq mövcuddur' });
@@ -54,6 +66,3 @@ export const register = async (req, res) => {
         return res.status(500).json({ message: 'Server xətası baş verdi' });
     }
 };
-
-
-

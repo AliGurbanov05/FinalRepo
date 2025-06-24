@@ -9,6 +9,9 @@ import userRouter from "./router/userRoutes.js"
 import appointmentRouter from "./router/appointmentRouter.js"
 import { connectDB } from "./db/config.js";
 import doctorRouter from './router/doctorRouter.js';
+import resultRouter from './router/resultRouter.js';
+import adminRouter from './router/adminRouter.js';
+import emailRouter from './router/emailRouter.js';
 
 dotenv.config();
 connectDB();
@@ -26,9 +29,12 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/patients", patientRouter);
 app.use('/doctor', doctorRouter);
-// app.use("/response", responseRouter);
 app.use("/payment", paymentRouter);
 app.use("/users", userRouter);
+app.use('/email', emailRouter);
+app.use('/result', resultRouter);
+app.use("/admin", adminRouter);
+
 app.listen(PORT || 8030, () => {
     console.log("Server is running on port " + PORT);
 });
