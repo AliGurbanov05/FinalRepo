@@ -16,6 +16,7 @@ import Payment from '../pages/payment/Payment';
 import Receipt from '../pages/receipt/Receipt';
 import Appointement from '../pages/appointment/Appointment';
 import Result from '../pages/result/Result';
+import Contact from '../pages/contact/Contact';
 // import DoctorDashboard from '../pages/dashboard/DoctorDashboard'; // öz yolunuza görə düzəldin
 
 const Router = () => {
@@ -26,6 +27,7 @@ const Router = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/blog' element={<Blog />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/contact' element={<Contact/>} />
                 <Route path='/doctors' element={<Doctors />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/departament' element={<Departament />} />

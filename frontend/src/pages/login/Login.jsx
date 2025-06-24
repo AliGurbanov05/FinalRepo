@@ -13,14 +13,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // 1. Admin üçün frontend yoxlama
-    if (name === 'Eli' && password === '2025') {
-      localStorage.setItem('token', 'admin-static-token'); // istəsən JWT verə bilərik
-      localStorage.setItem('role', 'admin');
-      navigate('/admin');
-      return;
-    }
-
     // 2. Normal istifadəçi girişi
     try {
       const res = await axios.post('http://localhost:8030/login', { name, password });
@@ -33,6 +25,8 @@ const Login = () => {
         navigate('/patient/dashboard');
       } else if (role === 'doctor') {
         navigate('/doctor/dashboard');
+      } else if (role === 'admin') {
+        navigate('/admin');
       } else {
         navigate('/');
       }

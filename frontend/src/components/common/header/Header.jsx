@@ -34,6 +34,7 @@ const Header = () => {
   const goToHome = () => navigate('/');
   const goToBlog = () => navigate('/blog');
   const goToDoctors = () => navigate('/doctors');
+  const goToContact = () => navigate('/contact');
   const goToAppointement = () => navigate('/appointement');
   const goToDepartament = () => navigate('/departament');
 
@@ -55,17 +56,19 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('fullname');
-    localStorage.removeItem('role');
+    localStorage.clear();
+    sessionStorage.clear();    
     setIsAuthenticated(false);
     navigate('/');
   };
+  
 
   // yalnız dashboard səhifələrində logout göstərilsin
   const isDashboardPage =
     location.pathname.startsWith('/patient/dashboard') ||
-    location.pathname.startsWith('/doctor/dashboard');
+    location.pathname.startsWith('/doctor/dashboard') ||
+    location.pathname.startsWith('/admin');
+
 
   return (
     <div className={style.header}>
@@ -78,7 +81,7 @@ const Header = () => {
             <li><a onClick={goToDepartament} href="#">Departament</a></li>
             <li><a onClick={goToDoctors} href="#">Doctors</a></li>
             <li><a onClick={goToBlog} href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a onClick={goToContact} href="#">Contact</a></li>
           </ul>
         </div>
 

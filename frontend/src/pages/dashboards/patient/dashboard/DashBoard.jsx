@@ -35,12 +35,9 @@ const DashBoard = () => {
 
 
     const user = useSelector((state) => state.auth.user);
-    console.log('Görüşlər:', appointments);
-    console.log('Diaqnozlar:', responses);
 
 
     useEffect(() => {
-        console.log('Dashboard data:', data);
         if (data) {
             setFormData({
                 name: data.user?.name || data.name || '',

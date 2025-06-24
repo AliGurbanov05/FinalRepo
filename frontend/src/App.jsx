@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem('token');
-      console.log('Frontend token:', token); // əlavə et
       if (token) {
         try {
           const res = await axios.get('http://localhost:8030/users/me', {

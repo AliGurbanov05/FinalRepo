@@ -93,7 +93,6 @@ const Services = () => {
                         <img src={tabs[activeIndex].image} alt={tabs[activeIndex].title} />
                     </div>
                 </div>
-
             </div>
         </div>
     )
