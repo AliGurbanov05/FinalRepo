@@ -1,0 +1,10 @@
+.env codes:mongose_URL=mongodb+srv://Ali:Qurbanov2005@cluster0.bx39qu2.mongodb.net/
+JWT_SECRET=my_top_secret_key
+STRIPE_SECRET_KEY=sk_test_51RaFSdQXeq3v4A6JHHp31EORXODrzjr9WqmvleHJF8blpMlNyEZ72EEALs3BOxvqzo7GkOWc6apLP9X872GUWBNi00uNupz3S0
+DOCTOR_SECRET_KEY=hekim12345
+EMAIL_USER=alizg-sp103@code.edu.az
+EMAIL_PASS=mdjyuaagwkuyaebq
+TWILIO_ACCOUNT_SID=ACce2b32869c829ac9287c7cbf9ea33384
+TWILIO_AUTH_TOKEN=c5fc389f93d6dce5a83a45d2bfd84a91
+TWILIO_VERIFY_SID=VA50cd1d22038d09ac1803e692ce90dcae
+
