@@ -12,6 +12,7 @@ import doctorRouter from './router/doctorRouter.js';
 import resultRouter from './router/resultRouter.js';
 import adminRouter from './router/adminRouter.js';
 import emailRouter from './router/emailRouter.js';
+import otpRoutes from './router/otpRouter.js';
 
 dotenv.config();
 connectDB();
@@ -34,6 +35,7 @@ app.use("/users", userRouter);
 app.use('/email', emailRouter);
 app.use('/result', resultRouter);
 app.use("/admin", adminRouter);
+app.use('/otp', otpRoutes);
 
 app.listen(PORT || 8030, () => {
     console.log("Server is running on port " + PORT);
