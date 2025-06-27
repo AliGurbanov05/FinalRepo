@@ -1,0 +1,73 @@
+.product {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    min-height: 220vh;
+    padding: 30px 0;
+    background-image: url("../../../images/body-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+
+    .txt {
+        gap: 10px;
+        display: flex;
+        padding: 30px 0;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+
+        p {
+            color: black;
+            display: block;
+            font-family: "Lora", Georgia, serif;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 32.4px;
+        }
+
+        h1 {
+            color: rgb(0, 0, 0);
+            font-family: "Poppins", Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 60px;
+        }
+
+        span {
+            color: rgb(128, 128, 128);
+            font-family: "Poppins", Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 27p;
+        }
+    }
+
+    .cards {
+        width: 81%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        padding: 0 20px;
+
+    }
+
+    @media (max-width: 768px) {
+        .cards {
+            .card {
+                width: 90%;
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .cards {
+            .card {
+                width: 45%;
+            }
+        }
+    }
+}

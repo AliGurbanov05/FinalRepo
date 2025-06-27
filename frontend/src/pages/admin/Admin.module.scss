@@ -1,0 +1,133 @@
+.adminPage {
+    padding: 1.5rem;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        thead {
+            width: 100%;
+            background-color: #f3f4f6;
+
+            th {
+                padding: 0.75rem;
+                font-weight: 600;
+                text-align: left;
+                border-bottom: 2px solid #ddd;
+            }
+        }
+
+        tbody {
+            tr {
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: #f9fafb;
+                }
+
+                td {
+                    padding: 0.75rem;
+                    border-bottom: 1px solid #eee;
+
+                    input {
+                        width: 100%;
+                        padding: 0.5rem;
+                        border: 1px solid #ccc;
+                        border-radius: 6px;
+                        font-size: 0.9rem;
+                        transition: border 0.2s;
+
+                        &:focus {
+                            border-color: #2563eb;
+                            outline: none;
+                        }
+                    }
+
+                    button {
+                        font-weight: 600;
+                        cursor: pointer;
+                        background: none;
+                        border: none;
+                        padding: 0.4rem 0.6rem;
+                        border-radius: 4px;
+                        transition: background-color 0.3s;
+
+                        &.editBtn {
+                            color: #2563eb;
+
+                            &:hover {
+                                background-color: rgba(37, 99, 235, 0.1);
+                            }
+                        }
+
+                        &.saveBtn {
+                            color: #16a34a;
+
+                            &:hover {
+                                background-color: rgba(22, 163, 74, 0.1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .error {
+        color: #dc2626;
+        margin-bottom: 1rem;
+    }
+
+    .loading {
+        color: #9ca3af;
+    }
+
+    #tab2 {
+        width: 100%;
+
+        .thead {
+            width: 100%;
+        }
+    }
+
+    .dlt {
+        color: red;
+    }
+
+    .delete {
+        color: red;
+        margin: 20px 30px;
+    }
+
+    .fix {
+        color: blue;
+        margin: 0 30px;
+    }
+
+    .ms {
+        width: 20%;
+        display: flex;
+        position: absolute;
+
+        p {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .btns{
+        width: 20%;
+       
+    }
+}

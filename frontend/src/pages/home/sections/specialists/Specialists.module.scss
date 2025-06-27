@@ -1,0 +1,107 @@
+.specialists {
+    gap: 30px;
+    width: 100%;
+    display: flex;
+    margin: 30px 0;
+    padding: 30px 0;
+    min-height: 135vh;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .txt {
+        gap: 5px;
+        display: flex;
+        margin-top: 30px;
+        padding-top: 30px;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+
+        .header {
+            gap: 5px;
+            display: flex;
+            padding-right: 25px;
+            align-items: center;
+
+            .line {
+                width: 40px;
+                height: 1.5px;
+                background-color: rgb(57, 108, 240);
+            }
+
+            p {
+                color: rgb(57, 108, 240);
+                display: inline-block;
+                font-family: "Muli", sans-serif;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 27px
+            }
+        }
+
+        h1 {
+            color: rgb(3, 4, 49);
+            display: block;
+            font-family: "Muli", sans-serif;
+            font-size: 45px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 50px;
+        }
+    }
+
+    .divs {
+        width: 70%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        .div {
+            gap: 15px;
+            width: 300px;
+            display: flex;
+            padding: 30px;
+            flex-direction: column;
+
+            p {
+                color: rgb(22, 30, 70);
+                display: block;
+                font-family: "Muli", sans-serif;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 30px;
+            }
+
+            span {
+                color: rgb(165, 165, 165);
+                display: block;
+                font-family: "Muli", sans-serif;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 21px;
+            }
+
+            .icons {
+                width: 50%;
+                display: flex;
+                cursor: pointer;
+                align-items: center;
+                justify-content: space-between;
+
+                .icon {
+                    color: rgb(159, 168, 195);
+                    display: inline-block;
+                    font-family: "Muli", sans-serif;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
